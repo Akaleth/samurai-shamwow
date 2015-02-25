@@ -25,11 +25,6 @@ public class EventManager {
         return null;
     }
 
-    public Event.ActivateEvent Disturbance_SpawnDrunkard(int difficulty)
-    {
-        return null;
-    }
-
     public Event.ActivateEvent Disturbance_SpawnThief(int difficulty)
     {
         return null;
