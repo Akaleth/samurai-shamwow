@@ -14,7 +14,7 @@ public class PlayerSamurai : MonoBehaviour
 
     public enum BodyState
     {
-        Attacking, Running, Dashing, Idle
+        Charging, Attacking, Running, Dashing, Idle
     }
 
     protected BodyState CurrentBodyState;
@@ -24,14 +24,43 @@ public class PlayerSamurai : MonoBehaviour
 	{
 	    Health = 2;
 	    Might = Honor = Glory = Cunning = Wisdom = 1;
+        CurrentBodyState = BodyState.Idle;
 	}
 	
 	// Update is called once per frame
-	void Update () {
-
-	    
+	void Update () 
+    {
+        // Left mouse button pressed
+        if (Input.GetMouseButtonDown(0))
+        {
+            switch (CurrentBodyState)
+            {
+                case BodyState.Charging:
+                    break;
+                case BodyState.Attacking:
+                    break;
+                case BodyState.Running:
+                    Charge();
+                    break;
+                case BodyState.Dashing:
+                    Charge();
+                    break;
+                case BodyState.Idle:
+                    Charge();
+                    break;
+                default:
+                    break;
+            }
+        }
+        // TODO: Attacking, Dashing, and Interacting
+	        
 
 	}
+
+    void Charge()
+    {
+        CurrentBodyState = BodyState.Charging;
+    }
 
     void Attack()
     {
