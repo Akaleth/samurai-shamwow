@@ -17,6 +17,9 @@ public class PlayerSamurai : MonoBehaviour
         Charging, Attacking, Running, Dashing, Idle
     }
 
+    protected GameObject chargeTarget;
+    protected bool hasTarget;
+
     protected BodyState CurrentBodyState;
 
     // Use this for initialization
@@ -25,6 +28,8 @@ public class PlayerSamurai : MonoBehaviour
 	    Health = 2;
 	    Might = Honor = Glory = Cunning = Wisdom = 1;
         CurrentBodyState = BodyState.Idle;
+        chargeTarget = null;
+        hasTarget = false;
 	}
 	
 	// Update is called once per frame
@@ -33,9 +38,12 @@ public class PlayerSamurai : MonoBehaviour
         // Left mouse button pressed
         if (Input.GetMouseButtonDown(0))
         {
-            switch (CurrentBodyState)
+            if(!hasTarget)
+                Charge();
+            /*switch (CurrentBodyState)
             {
                 case BodyState.Charging:
+                    transform.LookAt(chargeTarget.transform);
                     break;
                 case BodyState.Attacking:
                     break;
@@ -50,16 +58,25 @@ public class PlayerSamurai : MonoBehaviour
                     break;
                 default:
                     break;
-            }
+            }*/
         }
-        // TODO: Attacking, Dashing, and Interacting
-	        
 
+        if (Input.GetKey(KeyCode.T))
+        {
+            lockOff();
+        }
+
+        // TODO: Attacking, Dashing, and Interacting
+
+        if(hasTarget)
+            transform.LookAt(chargeTarget.transform);
 	}
 
     void Charge()
     {
-        CurrentBodyState = BodyState.Charging;
+        if (!hasTarget)
+            if (lockOn())
+                CurrentBodyState = BodyState.Charging;
     }
 
     void Attack()
@@ -75,5 +92,37 @@ public class PlayerSamurai : MonoBehaviour
     void Interact()
     {
         
+    }
+
+    bool lockOn()
+    {
+        RaycastHit hit;
+        if (Physics.Raycast(transform.position, transform.forward, out hit, 10))
+        {
+            chargeTarget = hit.collider.gameObject;
+            hasTarget = true;
+
+            CharacterMotor cm = GetComponent<CharacterMotor>();
+            cm.movement.maxForwardSpeed = 3;
+            cm.movement.maxBackwardsSpeed = 3;
+            cm.movement.maxSidewaysSpeed = 3;
+
+            return true;
+        }
+        return false;
+    }
+
+    void lockOff()
+    {
+        chargeTarget = null;
+        hasTarget = false;
+
+        CharacterMotor cm = GetComponent<CharacterMotor>();
+        cm.movement.maxForwardSpeed = 10;
+        cm.movement.maxBackwardsSpeed = 10;
+        cm.movement.maxSidewaysSpeed = 10;
+
+        // add force/something to shoot player towards the target's location at the time of the attack
+        // ask Chris about this; apply force maybe, but currently no rigidbody on it, maybe easier way
     }
 }
