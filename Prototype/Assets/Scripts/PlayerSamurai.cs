@@ -20,7 +20,11 @@ public class PlayerSamurai : MonoBehaviour
     protected GameObject chargeTarget;
     protected bool hasTarget;
 
+	protected Vector3 attackTarget;
+
     protected BodyState CurrentBodyState;
+
+	protected double attackTimer = 0.0;
 
     // Use this for initialization
 	void Start ()
@@ -40,36 +44,48 @@ public class PlayerSamurai : MonoBehaviour
         {
             if(!hasTarget)
                 Charge();
-            /*switch (CurrentBodyState)
-            {
-                case BodyState.Charging:
-                    transform.LookAt(chargeTarget.transform);
-                    break;
-                case BodyState.Attacking:
-                    break;
-                case BodyState.Running:
-                    Charge();
-                    break;
-                case BodyState.Dashing:
-                    Charge();
-                    break;
-                case BodyState.Idle:
-                    Charge();
-                    break;
-                default:
-                    break;
-            }*/
-        }
-
-        if (Input.GetKey(KeyCode.T))
-        {
-            lockOff();
         }
 
         // TODO: Attacking, Dashing, and Interacting
 
         if(hasTarget)
             transform.LookAt(chargeTarget.transform);
+
+
+		switch (CurrentBodyState)
+		{
+			case BodyState.Charging:
+				transform.LookAt(chargeTarget.transform);
+			    
+			    if (Input.GetKeyDown(KeyCode.T))
+				{
+					Attack();
+					lockOff();
+				}
+				break;
+			case BodyState.Attacking:
+			    transform.LookAt(attackTarget);
+
+			    GetComponent<CharacterController>().Move((attackTarget - transform.position).normalized * Time.deltaTime * 50);
+			    attackTimer += Time.deltaTime;
+
+			    if(Vector3.Distance(attackTarget, transform.position) <= 5 || attackTimer >= 5.0 || Input.GetKeyDown(KeyCode.T))
+				{
+					CurrentBodyState = BodyState.Idle;
+					attackTarget = Vector3.zero;
+				    attackTimer = 0;
+				}
+				break;
+			case BodyState.Running:
+				break;
+			case BodyState.Dashing:
+				break;
+			case BodyState.Idle:
+				break;
+			default:
+				break;
+		}
+
 	}
 
     void Charge()
@@ -81,7 +97,15 @@ public class PlayerSamurai : MonoBehaviour
 
     void Attack()
     {
-        
+        if (hasTarget) 
+		{
+			attackTarget = chargeTarget.transform.position;
+			transform.LookAt(attackTarget);
+
+			CurrentBodyState = BodyState.Attacking;
+
+			chargeTarget = null;
+		}
     }
 
     void Dash()
