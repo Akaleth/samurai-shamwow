@@ -48,8 +48,8 @@ public class PlayerSamurai : MonoBehaviour
 
         // TODO: Attacking, Dashing, and Interacting
 
-        if(hasTarget)
-            transform.LookAt(chargeTarget.transform);
+        //if(hasTarget)
+           // transform.LookAt(chargeTarget.transform);
 
 
 		switch (CurrentBodyState)
