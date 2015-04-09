@@ -42,42 +42,42 @@ public class EventManager {
 
     // Here, we'll hold all of the activation methods for events
 
-    public Event.ActivateEvent Attack_SpawnBandits(int difficulty)
+    public Event.ActivateEvent Attack_SpawnBandits(Transform spawnPoint, int difficulty)
     {
         return null;
     }
 
-    public Event.ActivateEvent Attack_SpawnNinjas(int difficulty)
+    public Event.ActivateEvent Attack_SpawnNinjas(Transform spawnPoint, int difficulty)
     {
         return null;
     }
 
-    public Event.ActivateEvent Attack_SpawnEnemySamurai(int difficulty)
+    public Event.ActivateEvent Attack_SpawnEnemySamurai(Transform spawnPoint, int difficulty)
     {
         return null;
     }
 
-    public Event.ActivateEvent Disturbance_SpawnDrunkard(int difficulty)
+    public Event.ActivateEvent Disturbance_SpawnDrunkard(Transform spawnPoint, int difficulty)
     {
         return null;
     }
 
-    public Event.ActivateEvent Disturbance_SpawnThief(int difficulty)
+    public Event.ActivateEvent Disturbance_SpawnThief(Transform spawnPoint, int difficulty)
     {
         return null;
     }
 
-    public Event.ActivateEvent Opportunity_SpawnAssassin(int difficulty)
+    public Event.ActivateEvent Opportunity_SpawnAssassin(Transform spawnPoint, int difficulty)
     {
         return null;
     }
 
-    public Event.ActivateEvent Opportunity_SpawnHealer(int difficulty)
+    public Event.ActivateEvent Opportunity_SpawnHealer(Transform spawnPoint, int difficulty)
     {
         return null;
     }
 
-    public Event.ActivateEvent Opportunity_SpawnStoryTeller(int difficulty)
+    public Event.ActivateEvent Opportunity_SpawnStoryTeller(Transform spawnPoint, int difficulty)
     {
         return null;
     }
@@ -103,8 +103,6 @@ public class EventManager {
                         break;
                     case 3:
                         numOpps++;
-                        break;
-                    default:
                         break;
                 }
             }

@@ -40,7 +40,7 @@ public class Player : MonoBehaviour {
             case Samurai.BodyState.Attacking:
                 transform.LookAt(_samurai.attackTarget);
 
-                GetComponent<CharacterController>().Move((_samurai.attackTarget - transform.position).normalized * Time.deltaTime * 50);
+                GetComponent<CharacterController>().Move((_samurai.attackTarget - transform.position).normalized * Time.deltaTime * _samurai.GetAttackSpeed());
                 _samurai.attackTimer += Time.deltaTime;
 
                 if (Vector3.Distance(_samurai.attackTarget, transform.position) <= 5 || _samurai.attackTimer >= 5.0 || Input.GetKeyDown(KeyCode.T))

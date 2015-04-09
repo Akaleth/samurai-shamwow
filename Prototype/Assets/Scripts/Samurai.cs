@@ -1,13 +1,12 @@
 ﻿using UnityEngine;
-using System.Collections;
 
 public class Samurai : MonoBehaviour {
 
-    public int Might;
+    public int Tiger;
+    public int Monkey;
+    public int Crane;
     public int Honor;
     public int Glory;
-    public int Cunning;
-    public int Wisdom;
 
     public int Health;
 
@@ -28,7 +27,7 @@ public class Samurai : MonoBehaviour {
 	// Use this for initialization
 	void Start () {
         Health = 2;
-        Might = Honor = Glory = Cunning = Wisdom = 1;
+        Tiger = Honor = Glory = Monkey = Crane = 1;
         CurrentBodyState = BodyState.Idle;
         chargeTarget = null;
         hasTarget = false;
@@ -100,4 +99,12 @@ public class Samurai : MonoBehaviour {
         // add force/something to shoot player towards the target's location at the time of the attack
         // ask Chris about this; apply force maybe, but currently no rigidbody on it, maybe easier way
     }
+
+    public float GetAttackSpeed()
+    {
+        // For now...
+        return Tiger * 50.0f;
+    }
+
+    
 }
