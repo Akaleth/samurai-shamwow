@@ -2,6 +2,8 @@
 
 public class Samurai : MonoBehaviour {
 
+    public bool IsPlayer = false;
+
     public int Tiger;
     public int Monkey;
     public int Crane;

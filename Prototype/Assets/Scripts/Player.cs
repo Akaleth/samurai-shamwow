@@ -4,11 +4,12 @@ using System.Collections;
 [RequireComponent (typeof (Samurai))]
 public class Player : MonoBehaviour {
 
-    Samurai _samurai;
+    public Samurai MySamurai;
 
 	// Use this for initialization
 	void Start () {
-        _samurai = GetComponent<Samurai>();
+        MySamurai = GetComponent<Samurai>();
+        MySamurai.IsPlayer = true;
 	}
 	
 	// Update is called once per frame
@@ -16,36 +17,36 @@ public class Player : MonoBehaviour {
         // Left mouse button pressed
         if (Input.GetMouseButtonDown(0))
         {
-            _samurai.Attack();
+            MySamurai.Attack();
         }
 
         if (Input.GetKeyDown(KeyCode.E))
         {
-            _samurai.CurrentBodyState = Samurai.BodyState.Dashing;
+            MySamurai.CurrentBodyState = MySamurai.BodyState.Dashing;
         }
 
         // TODO: Attacking, Dashing, and Interacting
 
 
-        switch (_samurai.CurrentBodyState)
+        switch (MySamurai.CurrentBodyState)
         {
-            case Samurai.BodyState.Idle:
+            case MySamurai.BodyState.Idle:
                 break;
-            case Samurai.BodyState.Attacking:
+            case MySamurai.BodyState.Attacking:
                 break;
-            case Samurai.BodyState.Dashing:
-                if (_samurai.dashTimer == _samurai.dashTime)
+            case MySamurai.BodyState.Dashing:
+                if (MySamurai.dashTimer == MySamurai.dashTime)
                 {
-                    _samurai.CurrentBodyState = Samurai.BodyState.Idle;
+                    MySamurai.CurrentBodyState = MySamurai.BodyState.Idle;
                 }
                 else
                 {
 
                 }
                 break;
-            case Samurai.BodyState.Parrying:
+            case MySamurai.BodyState.Parrying:
                 break;
-            case Samurai.BodyState.Stunned:
+            case MySamurai.BodyState.Stunned:
 
             default:
                 break;

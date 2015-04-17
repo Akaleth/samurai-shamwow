@@ -1,13 +1,17 @@
 ﻿using UnityEngine;
-using System.Collections;
+using System.Collections.Generic;
+using System.Linq;
 
 public class GameManager : MonoBehaviour
 {
 
-    public PlayerSamurai Player1;
-    public PlayerSamurai Player2;
-    public PlayerSamurai Player3;
-    public PlayerSamurai Player4;
+    public Player Player1;
+    public Player Player2;
+    public Player Player3;
+    public Player Player4;
+
+    public static List<Samurai> Players;
+    public static int NumPlayers = 4;
 
     public GameObject Blacksmith;
     public GameObject Library;
@@ -30,7 +34,7 @@ public class GameManager : MonoBehaviour
 
     public static GameObject RandomPlayer(GameObject caller)
     {
-        return null;
+        return Players.Where(x => x.IsPlayer).ElementAt(Random.Range(0, NumPlayers)).transform.gameObject;
     }
 
     public static GameObject RandomVilager(GameObject caller)
@@ -41,7 +45,7 @@ public class GameManager : MonoBehaviour
 	// Use this for initialization
 	void Start () 
     {
-	    
+        Players = new List<Samurai> { Player1.MySamurai, Player2.MySamurai, Player3.MySamurai, Player4.MySamurai };
 	}
 	
 	// Update is called once per frame
