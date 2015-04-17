@@ -40,9 +40,7 @@ public class Samurai : MonoBehaviour {
 
     public void Charge()
     {
-        if (!hasTarget)
-            if (lockOn())
-                CurrentBodyState = BodyState.Charging;
+
     }
 
     public void Attack()
@@ -66,38 +64,6 @@ public class Samurai : MonoBehaviour {
     public void Interact()
     {
 
-    }
-
-    public bool lockOn()
-    {
-        RaycastHit hit;
-        if (Physics.Raycast(transform.position, transform.forward, out hit, 10))
-        {
-            chargeTarget = hit.collider.gameObject;
-            hasTarget = true;
-
-            CharacterMotor cm = GetComponent<CharacterMotor>();
-            cm.movement.maxForwardSpeed = 3;
-            cm.movement.maxBackwardsSpeed = 3;
-            cm.movement.maxSidewaysSpeed = 3;
-
-            return true;
-        }
-        return false;
-    }
-
-    public void lockOff()
-    {
-        chargeTarget = null;
-        hasTarget = false;
-
-        CharacterMotor cm = GetComponent<CharacterMotor>();
-        cm.movement.maxForwardSpeed = 10;
-        cm.movement.maxBackwardsSpeed = 10;
-        cm.movement.maxSidewaysSpeed = 10;
-
-        // add force/something to shoot player towards the target's location at the time of the attack
-        // ask Chris about this; apply force maybe, but currently no rigidbody on it, maybe easier way
     }
 
     public float GetAttackSpeed()
