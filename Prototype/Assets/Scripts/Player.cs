@@ -16,45 +16,37 @@ public class Player : MonoBehaviour {
         // Left mouse button pressed
         if (Input.GetMouseButtonDown(0))
         {
-            if (!_samurai.hasTarget)
-                _samurai.Charge();
+            _samurai.Attack();
+        }
+
+        if (Input.GetKeyDown(KeyCode.E))
+        {
+            _samurai.CurrentBodyState = Samurai.BodyState.Dashing;
         }
 
         // TODO: Attacking, Dashing, and Interacting
 
-        if (_samurai.hasTarget)
-            transform.LookAt(_samurai.chargeTarget.transform);
-
 
         switch (_samurai.CurrentBodyState)
         {
-            case Samurai.BodyState.Charging:
-                transform.LookAt(_samurai.chargeTarget.transform);
-
-                if (Input.GetKeyDown(KeyCode.T))
-                {
-                    _samurai.Attack();
-                }
-                break;
-            case Samurai.BodyState.Attacking:
-                transform.LookAt(_samurai.attackTarget);
-
-                GetComponent<CharacterController>().Move((_samurai.attackTarget - transform.position).normalized * Time.deltaTime * _samurai.GetAttackSpeed());
-                _samurai.attackTimer += Time.deltaTime;
-
-                if (Vector3.Distance(_samurai.attackTarget, transform.position) <= 5 || _samurai.attackTimer >= 5.0 || Input.GetKeyDown(KeyCode.T))
-                {
-                    _samurai.CurrentBodyState = Samurai.BodyState.Idle;
-                    _samurai.attackTarget = Vector3.zero;
-                    _samurai.attackTimer = 0;
-                }
-                break;
-            case Samurai.BodyState.Running:
-                break;
-            case Samurai.BodyState.Dashing:
-                break;
             case Samurai.BodyState.Idle:
                 break;
+            case Samurai.BodyState.Attacking:
+                break;
+            case Samurai.BodyState.Dashing:
+                if (_samurai.dashTimer == _samurai.dashTime)
+                {
+                    _samurai.CurrentBodyState = Samurai.BodyState.Idle;
+                }
+                else
+                {
+
+                }
+                break;
+            case Samurai.BodyState.Parrying:
+                break;
+            case Samurai.BodyState.Stunned:
+
             default:
                 break;
         }
