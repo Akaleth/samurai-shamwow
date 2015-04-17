@@ -34,7 +34,6 @@ public class Player : MonoBehaviour {
                 if (Input.GetKeyDown(KeyCode.T))
                 {
                     _samurai.Attack();
-                    _samurai.lockOff();
                 }
                 break;
             case Samurai.BodyState.Attacking:

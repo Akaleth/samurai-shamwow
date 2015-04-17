@@ -1,24 +1,37 @@
 ﻿using UnityEngine;
 using System.Collections;
+using System.Collections.Generic;
 
+[RequireComponent(typeof(Samurai))]
 public class EnemyAI : MonoBehaviour
 {
 
-    public GameObject EnemyGameObject;
+    private Samurai _samurai;
 
-    public enum ObjectiveValue
+    public enum AttackPreference
     {
-        BurnCrops,
-        KillElder,
-        KillVillagers,
-        KillPlayers
+        ClosestPlayer,
+        ClosestVillager,
+        WeakestPlayer,
+        RandomPlayer,
+        RandomVillager,
+        Blacksmith,
+        Tavern,
+        Library
     }
 
-    public ObjectiveValue Objective;
+    public GameObject AcquireTarget(AttackPreference pref)
+    {
+        switch (pref)
+        {
+            
+        }
+        return null;
+    }
 
     // Use this for initialization
 	void Start () {
-	
+        _samurai = GetComponent<Samurai>();
 	}
 	
 	// Update is called once per frame
