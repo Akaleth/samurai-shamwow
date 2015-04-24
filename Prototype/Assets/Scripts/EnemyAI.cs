@@ -9,7 +9,9 @@ public class EnemyAI : MonoBehaviour
 
     private Samurai _samurai;
     private NavMeshAgent _agent;
-    private Transform _target;
+    private GameObject _target;
+
+    public float perceptionRange = 50.0f;
 
     public enum AttackPreference
     {
@@ -36,11 +38,15 @@ public class EnemyAI : MonoBehaviour
             case AttackPreference.Tavern:
                 return GameManager.Tavern;
             case AttackPreference.RandomPlayer:
-                return GameManager.RandomPlayer(this.transform.gameObject);
+                return GameManager.RandomPlayer(this.gameObject);
+            case AttackPreference.RandomVillager:
+                return GameManager.RandomVillager(this.gameObject, perceptionRange);
             case AttackPreference.ClosestPlayer:
-                return GameManager.ClosestPlayer(this.transform.gameObject);
+                return GameManager.ClosestPlayer(this.gameObject);
+            case AttackPreference.ClosestVillager:
+                return GameManager.ClosestVillager(this.gameObject);
             case AttackPreference.WeakestPlayer:
-                return GameManager.WeakestPlayer(this.transform.gameObject);
+                return GameManager.WeakestPlayer(this.gameObject);
         }
         return null;
     }

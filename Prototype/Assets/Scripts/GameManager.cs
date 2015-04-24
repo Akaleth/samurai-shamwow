@@ -13,6 +13,9 @@ public class GameManager : MonoBehaviour
     public static List<Samurai> Players;
     public static int NumPlayers = 4;
 
+    public static List<Villager> Villagers;
+    public static int NumVillagers = 40;
+
     public static GameObject Blacksmith;
     public static GameObject Library;
     public static GameObject Tavern;
@@ -70,7 +73,29 @@ public class GameManager : MonoBehaviour
 
     public static GameObject ClosestVillager(GameObject caller)
     {
-        return null;
+        NavMeshAgent agent = caller.GetComponent<NavMeshAgent>();
+        if (agent == null)
+        {
+            return null;
+        }
+
+        NavMeshPath path = null;
+        GameObject closest = null;
+        float closestDist = float.MaxValue;
+
+        foreach (var villager in Villagers)
+        {
+            if (!agent.CalculatePath(villager.transform.position, path))
+            {
+                return null;
+            }
+            if (PathDistance(path) < closestDist)
+            {
+                closestDist = PathDistance(path);
+                closest = villager.transform.gameObject;
+            }
+        }
+        return closest;
     }
 
     public static GameObject WeakestPlayer(GameObject caller)
@@ -83,14 +108,18 @@ public class GameManager : MonoBehaviour
         return Players.Where(x => x.IsPlayer).ElementAt(Random.Range(0, NumPlayers)).transform.gameObject;
     }
 
-    public static GameObject RandomVillager(GameObject caller)
+    public static GameObject RandomVillager(GameObject caller, float range)
     {
-        return null;
+        Collider[] nearbyVillagers = Physics.OverlapSphere(caller.transform.position, range);
+        if (nearbyVillagers.Count() == 0)
+            return null;
+        return nearbyVillagers.Where(x => x.GetComponent<Villager>() != null).ElementAt(Random.Range(0, NumVillagers)).transform.gameObject;
     }
 
 	// Use this for initialization
 	void Start () 
     {
+        Villagers = new List<Villager>().Where(x => x.tag == "Villager").ToList();
         Players = new List<Samurai> { Player1.MySamurai, Player2.MySamurai, Player3.MySamurai, Player4.MySamurai };
 	}
 	
