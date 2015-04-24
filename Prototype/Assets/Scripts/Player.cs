@@ -22,7 +22,7 @@ public class Player : MonoBehaviour {
 
         if (Input.GetKeyDown(KeyCode.E))
         {
-            MySamurai.CurrentBodyState = MySamurai.BodyState.Dashing;
+            MySamurai.CurrentBodyState = Samurai.BodyState.Dashing;
         }
 
         // TODO: Attacking, Dashing, and Interacting
@@ -30,23 +30,23 @@ public class Player : MonoBehaviour {
 
         switch (MySamurai.CurrentBodyState)
         {
-            case MySamurai.BodyState.Idle:
+            case Samurai.BodyState.Idle:
                 break;
-            case MySamurai.BodyState.Attacking:
+            case Samurai.BodyState.Attacking:
                 break;
-            case MySamurai.BodyState.Dashing:
+            case Samurai.BodyState.Dashing:
                 if (MySamurai.dashTimer == MySamurai.dashTime)
                 {
-                    MySamurai.CurrentBodyState = MySamurai.BodyState.Idle;
+                    MySamurai.CurrentBodyState = Samurai.BodyState.Idle;
                 }
                 else
                 {
 
                 }
                 break;
-            case MySamurai.BodyState.Parrying:
+            case Samurai.BodyState.Parrying:
                 break;
-            case MySamurai.BodyState.Stunned:
+            case Samurai.BodyState.Stunned:
 
             default:
                 break;
