@@ -46,6 +46,9 @@
 	</Reference>
   </ItemGroup>
   <ItemGroup>
+     <Compile Include="Assets\Scripts\Actions\Action.cs" />
+     <Compile Include="Assets\Scripts\Actions\Attack.cs" />
+     <Compile Include="Assets\Scripts\Actions\Dash.cs" />
      <Compile Include="Assets\Scripts\EnemyAI.cs" />
      <Compile Include="Assets\Scripts\Event.cs" />
      <Compile Include="Assets\Scripts\EventManager.cs" />
@@ -55,8 +58,8 @@
      <Compile Include="Assets\Scripts\Samurai.cs" />
      <Compile Include="Assets\Scripts\SpawnPoint.cs" />
      <Compile Include="Assets\Scripts\TestEnemy.cs" />
+     <Compile Include="Assets\Scripts\Villager.cs" />
      <None Include="Assets\Standard Assets\Water (Basic)\Sources\Shaders\FX-Water Simple.shader" />
-     <None Include="Assets\Raw Mocap Data\Animations\_CompleteAnimationList.txt" />
  <Reference Include="Assembly-UnityScript-firstpass">
  <HintPath>D:/shamwow/Prototype/Library/ScriptAssemblies/Assembly-UnityScript-firstpass.dll</HintPath>
  </Reference>
