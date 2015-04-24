@@ -105,7 +105,7 @@ public class GameManager : MonoBehaviour
 
     public static GameObject RandomPlayer(GameObject caller)
     {
-        return Players.Where(x => x.IsPlayer).ElementAt(Random.Range(0, NumPlayers)).transform.gameObject;
+        return Players.Where(x => x.IsPlayer).ElementAt(Random.Range(0, Players.Count())).transform.gameObject;
     }
 
     public static GameObject RandomVillager(GameObject caller, float range)
@@ -120,7 +120,8 @@ public class GameManager : MonoBehaviour
 	void Start () 
     {
         Villagers = new List<Villager>().Where(x => x.tag == "Villager").ToList();
-        Players = new List<Samurai> { Player1.MySamurai, Player2.MySamurai, Player3.MySamurai, Player4.MySamurai };
+        Players = new List<Samurai> { Player1.MySamurai};
+        //Players = new List<Samurai> { Player1.MySamurai, Player2.MySamurai, Player3.MySamurai, Player4.MySamurai };
 	}
 	
 	// Update is called once per frame
