@@ -10,6 +10,9 @@ public class Player : MonoBehaviour {
 	void Start () {
         MySamurai = GetComponent<Samurai>();
         MySamurai.IsPlayer = true;
+        MySamurai.CreateActions(true);
+
+        Cursor.visible = false;
 	}
 	
 	// Update is called once per frame
@@ -22,29 +25,31 @@ public class Player : MonoBehaviour {
 
         if (Input.GetKeyDown(KeyCode.E))
         {
-            MySamurai.CurrentBodyState = Samurai.BodyState.Dashing;
+            Dash d = MySamurai.actions["Dash"] as Dash;
+            if (d.ActionReady())
+            {
+                d.DoAction();
+            }
         }
 
         // TODO: Attacking, Dashing, and Interacting
-
-
+        /*if (MySamurai.dashCooldownTimer < MySamurai.dashCooldown)
+        {
+            MySamurai.dashCooldownTimer += Time.deltaTime;
+        }*/
+        foreach (string k in MySamurai.actions.Keys)
+        {
+            MySamurai.actions[k].Update();
+        }
         switch (MySamurai.CurrentBodyState)
         {
             case Samurai.BodyState.Idle:
                 break;
-            case Samurai.BodyState.Attacking:
+            case Samurai.BodyState.Attacking: // Tiger attack
                 break;
-            case Samurai.BodyState.Dashing:
-                if (MySamurai.dashTimer == MySamurai.dashTime)
-                {
-                    MySamurai.CurrentBodyState = Samurai.BodyState.Idle;
-                }
-                else
-                {
-
-                }
+            case Samurai.BodyState.Dashing: // Monkey attack
                 break;
-            case Samurai.BodyState.Parrying:
+            case Samurai.BodyState.Parrying: // Crane
                 break;
             case Samurai.BodyState.Stunned:
 

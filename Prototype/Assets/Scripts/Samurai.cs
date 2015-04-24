@@ -1,4 +1,6 @@
 ﻿using UnityEngine;
+using System.Collections.Generic;
+using System.Collections;
 
 public class Samurai : MonoBehaviour {
 
@@ -10,10 +12,16 @@ public class Samurai : MonoBehaviour {
     //public int Honor;
     //public int Glory;
 
-    public int dashTimer;
-    public int dashTime;
+    public float dashTimer;
+    public float dashTime;
+    public float dashCooldown;
+    public float dashCooldownTimer;
 
     public int Health;
+    public Action currentAction;
+    public Dictionary<string, Action> readyActions;
+
+    public Dictionary<string, Action> actions;
 
     public enum BodyState
     {
@@ -27,8 +35,11 @@ public class Samurai : MonoBehaviour {
         Health = 2;
         Tiger = /*Honor = Glory = */Monkey = Crane = 1;
         CurrentBodyState = BodyState.Idle;
-        dashTime = 100;
-        dashTimer = 0;
+        dashTime = 0.3f;
+        dashTimer = 0.0f;
+        dashCooldown = 2.0f;
+        dashCooldownTimer = 2.0f;
+        CreateActions(false);
 	}
 	
 	// Update is called once per frame
@@ -46,11 +57,6 @@ public class Samurai : MonoBehaviour {
 
     }
 
-    public void Dash()
-    {
-
-    }
-
     public void Interact()
     {
 
@@ -60,6 +66,13 @@ public class Samurai : MonoBehaviour {
     {
         // For now...
         return Tiger * 50.0f;
+    }
+
+    public void CreateActions(bool playerAction)
+    {
+        actions = new Dictionary<string, Action>();
+        Dash d = new Dash(1.5f, 0.3f, this, playerAction);
+        actions.Add("Dash", d);
     }
 
     
