@@ -29,7 +29,18 @@ public class EnemyAI : MonoBehaviour
     {
         switch (pref)
         {
-            
+            case AttackPreference.Blacksmith:
+                return GameManager.Blacksmith;
+            case AttackPreference.Library:
+                return GameManager.Library;
+            case AttackPreference.Tavern:
+                return GameManager.Tavern;
+            case AttackPreference.RandomPlayer:
+                return GameManager.RandomPlayer(this.transform.gameObject);
+            case AttackPreference.ClosestPlayer:
+                return GameManager.ClosestPlayer(this.transform.gameObject);
+            case AttackPreference.WeakestPlayer:
+                return GameManager.WeakestPlayer(this.transform.gameObject);
         }
         return null;
     }

@@ -13,13 +13,59 @@ public class GameManager : MonoBehaviour
     public static List<Samurai> Players;
     public static int NumPlayers = 4;
 
-    public GameObject Blacksmith;
-    public GameObject Library;
-    public GameObject Tavern;
+    public static GameObject Blacksmith;
+    public static GameObject Library;
+    public static GameObject Tavern;
+
+    /// <summary>
+    /// Returns the length of a given path;
+    /// </summary>
+    /// <param name="from">The path to measure</param>
+    /// <returns></returns>
+    public static float PathDistance(NavMeshPath from)
+    {
+        if (from.corners.Length < 2)
+            return 0;
+
+        Vector3 previousCorner = from.corners[0];
+        float lengthSoFar = 0.0F;
+        int i = 1;
+        while (i < from.corners.Length)
+        {
+            Vector3 currentCorner = from.corners[i];
+            lengthSoFar += Vector3.Distance(previousCorner, currentCorner);
+            previousCorner = currentCorner;
+            i++;
+        }
+        return lengthSoFar;
+    
+    }
 
     public static GameObject ClosestPlayer(GameObject caller)
     {
-        return null;
+        NavMeshAgent agent = caller.GetComponent<NavMeshAgent>();
+        if (agent == null)
+        {
+            return null;
+        }
+        
+        NavMeshPath path = null;
+        GameObject closest = null;
+        float closestDist = float.MaxValue;
+
+        foreach (var player in Players)
+        {
+            if (!agent.CalculatePath(player.transform.position, path))
+            {
+                return null;
+            }
+            if (PathDistance(path) < closestDist)
+            {
+                closestDist = PathDistance(path);
+                closest = player.transform.gameObject;
+            }
+        }
+        return closest;
     }
 
     public static GameObject ClosestVillager(GameObject caller)
@@ -29,7 +75,7 @@ public class GameManager : MonoBehaviour
 
     public static GameObject WeakestPlayer(GameObject caller)
     {
-        return null;
+        return Players.OrderBy(x => x.Health).ElementAt(0).transform.gameObject;
     }
 
     public static GameObject RandomPlayer(GameObject caller)
@@ -37,7 +83,7 @@ public class GameManager : MonoBehaviour
         return Players.Where(x => x.IsPlayer).ElementAt(Random.Range(0, NumPlayers)).transform.gameObject;
     }
 
-    public static GameObject RandomVilager(GameObject caller)
+    public static GameObject RandomVillager(GameObject caller)
     {
         return null;
     }
