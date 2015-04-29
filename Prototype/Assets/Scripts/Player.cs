@@ -63,8 +63,8 @@ public class Player : MonoBehaviour {
                 break;
             case Samurai.BodyState.Parrying: // Crane
                 break;
-            case Samurai.BodyState.Stunned:
-
+            case Samurai.BodyState.Stunned: // Crane parry
+                break;
             default:
                 break;
         }
@@ -80,6 +80,7 @@ public class Player : MonoBehaviour {
             if (Vector3.Angle(target.transform.forward, target.transform.position - this.transform.position) <= target.GetFieldOfView() / 2)
             {
                 // Monkey hit is successful
+                // target.TakeDamage(monkeyDamage);
             }
         }
     }
