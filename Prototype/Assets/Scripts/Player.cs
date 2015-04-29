@@ -4,6 +4,10 @@ using System.Collections;
 [RequireComponent (typeof (Samurai))]
 public class Player : MonoBehaviour {
 
+    public bool stealthed;
+    private float stealthCooldown;
+    private float stealthCooldownTimer;
+
     private Samurai MySamurai;
 
 	// Use this for initialization
@@ -13,10 +17,17 @@ public class Player : MonoBehaviour {
         MySamurai.CreateActions(true);
 
         Cursor.visible = false;
+        stealthed = false;
+        stealthCooldown = 10.0f;
+        stealthCooldownTimer = 10.0f;
 	}
 	
 	// Update is called once per frame
 	void Update () {
+        if (stealthCooldownTimer <= stealthCooldown && !stealthed)
+        {
+            stealthCooldownTimer += Time.deltaTime;
+        }
         // Left mouse button pressed
         if (Input.GetMouseButtonDown(0))
         {
@@ -29,14 +40,15 @@ public class Player : MonoBehaviour {
             if (d.ActionReady())
             {
                 d.DoAction();
+                StealthOff();
             }
         }
 
-        // TODO: Attacking, Dashing, and Interacting
-        /*if (MySamurai.dashCooldownTimer < MySamurai.dashCooldown)
+        if (Input.GetKeyDown(KeyCode.R) && stealthCooldownTimer >= stealthCooldown)
         {
-            MySamurai.dashCooldownTimer += Time.deltaTime;
-        }*/
+            StealthOn();
+        }
+
         foreach (string k in MySamurai.actions.Keys)
         {
             MySamurai.actions[k].Update();
@@ -57,4 +69,37 @@ public class Player : MonoBehaviour {
                 break;
         }
 	}
+
+    void CheckMonkeyHit(Samurai target)
+    {
+        Plane[] planes = GeometryUtility.CalculateFrustumPlanes(GetComponent<Camera>());
+        Collider collider = target.GetComponent<Collider>();
+
+        if (GeometryUtility.TestPlanesAABB(planes, collider.bounds))
+        {
+            if (Vector3.Angle(target.transform.forward, target.transform.position - this.transform.position) <= target.GetFieldOfView() / 2)
+            {
+                // Monkey hit is successful
+            }
+        }
+    }
+
+    void StealthOn()
+    {
+        if (!stealthed)
+        {
+            stealthed = true;
+            MySamurai.GetComponent<CharacterMotor>().movement.maxForwardSpeed = 15.0f;
+        }
+    }
+
+    void StealthOff()
+    {
+        if (stealthed)
+        {
+            stealthed = false;
+            MySamurai.GetComponent<CharacterMotor>().movement.maxForwardSpeed = 10.0f;
+            stealthCooldownTimer = 0.0f;
+        }
+    }
 }
