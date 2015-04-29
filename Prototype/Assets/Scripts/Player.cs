@@ -9,6 +9,7 @@ public class Player : MonoBehaviour {
     private float stealthCooldownTimer;
 
     private Samurai MySamurai;
+	public Animator MyAnimator;
 
 	// Use this for initialization
 	void Start () {
@@ -20,6 +21,7 @@ public class Player : MonoBehaviour {
         stealthed = false;
         stealthCooldown = 10.0f;
         stealthCooldownTimer = 10.0f;
+		MyAnimator = GetComponent<Animator> ();
 	}
 	
 	// Update is called once per frame
@@ -28,9 +30,15 @@ public class Player : MonoBehaviour {
         {
             stealthCooldownTimer += Time.deltaTime;
         }
+
+		float horiz = Input.GetAxis("Horizontal");
+		float vert = Input.GetAxis("Vertical");
+		MyAnimator.SetFloat("run", vert);
+
         // Left mouse button pressed
         if (Input.GetMouseButtonDown(0))
         {
+			MyAnimator.SetBool("attack", true);
             MySamurai.Attack();
         }
 
@@ -53,15 +61,25 @@ public class Player : MonoBehaviour {
         {
             MySamurai.actions[k].Update();
         }
+		
         switch (MySamurai.CurrentBodyState)
         {
             case Samurai.BodyState.Idle:
+				MyAnimator.SetBool("attack", false);
                 break;
-            case Samurai.BodyState.Attacking: // Tiger attack
+            case Samurai.BodyState.Attacking:
                 break;
-            case Samurai.BodyState.Dashing: // Monkey attack
+            case Samurai.BodyState.Dashing:
+                if (MySamurai.dashTimer == MySamurai.dashTime)
+                {
+                    MySamurai.CurrentBodyState = Samurai.BodyState.Idle;
+                }
+                else
+                {
+
+                }
                 break;
-            case Samurai.BodyState.Parrying: // Crane
+            case Samurai.BodyState.Parrying:
                 break;
             case Samurai.BodyState.Stunned: // Crane parry
                 break;
