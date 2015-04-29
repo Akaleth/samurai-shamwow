@@ -5,10 +5,12 @@ using System.Linq;
 public class GameManager : MonoBehaviour
 {
 
-    public Player Player1;
-    public Player Player2;
-    public Player Player3;
-    public Player Player4;
+    public Samurai Player1;
+    public Samurai Player2;
+    public Samurai Player3;
+    public Samurai Player4;
+
+	private bool _initialized = false;
 
     public static List<Samurai> Players;
     public static int NumPlayers = 4;
@@ -105,7 +107,11 @@ public class GameManager : MonoBehaviour
 
     public static GameObject RandomPlayer(GameObject caller)
     {
-        return Players.Where(x => x.IsPlayer).ElementAt(Random.Range(0, Players.Count())).transform.gameObject;
+        var choice = Random.Range(0, Players.Count);
+        Debug.Log(choice);
+        if (Players[choice] == null)
+            return null;
+        return Players[choice].gameObject;
     }
 
     public static GameObject RandomVillager(GameObject caller, float range)
@@ -113,20 +119,19 @@ public class GameManager : MonoBehaviour
         Collider[] nearbyVillagers = Physics.OverlapSphere(caller.transform.position, range);
         if (nearbyVillagers.Count() == 0)
             return null;
-        return nearbyVillagers.Where(x => x.GetComponent<Villager>() != null).ElementAt(Random.Range(0, NumVillagers)).transform.gameObject;
+        return nearbyVillagers.Where(x => x.GetComponent<Villager>() != null).ElementAt(Random.Range(0, NumVillagers)).gameObject;
     }
 
 	// Use this for initialization
 	void Start () 
     {
         Villagers = new List<Villager>().Where(x => x.tag == "Villager").ToList();
-        Players = new List<Samurai> { Player1.MySamurai};
-        //Players = new List<Samurai> { Player1.MySamurai, Player2.MySamurai, Player3.MySamurai, Player4.MySamurai };
+        Players = new List<Samurai> { Player1, Player2, Player3, Player4 };
 	}
 	
 	// Update is called once per frame
 	void Update () 
     {
-	
+
 	}
 }

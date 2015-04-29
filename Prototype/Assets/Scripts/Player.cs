@@ -4,7 +4,7 @@ using System.Collections;
 [RequireComponent (typeof (Samurai))]
 public class Player : MonoBehaviour {
 
-    public Samurai MySamurai;
+    private Samurai MySamurai;
 
 	// Use this for initialization
 	void Start () {
