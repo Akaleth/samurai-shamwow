@@ -19,8 +19,11 @@ public class EnemyAI : MonoBehaviour
         Monkey,
         Crane
     }
-
     private EnemyType _type;
+
+    private float _tigerRange = 10.0f;
+    private float _monkeyRange = 10.0f;
+    private float _craneRange = 10.0f;
 
     public float perceptionRange = 50.0f;
 
