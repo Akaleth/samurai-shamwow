@@ -8,7 +8,7 @@ public class Player : MonoBehaviour {
     private float stealthCooldown;
     private float stealthCooldownTimer;
 
-    public Samurai MySamurai;
+    private Samurai MySamurai;
 
 	// Use this for initialization
 	void Start () {

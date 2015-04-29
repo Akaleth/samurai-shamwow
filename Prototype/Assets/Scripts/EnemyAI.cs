@@ -1,4 +1,5 @@
 ﻿using UnityEngine;
+using System;
 using System.Collections;
 using System.Collections.Generic;
 
@@ -10,6 +11,19 @@ public class EnemyAI : MonoBehaviour
     private Samurai _samurai;
     private NavMeshAgent _agent;
     private GameObject _target;
+    private bool _targetSet = false;
+
+    public enum EnemyType
+    {
+        Tiger,
+        Monkey,
+        Crane
+    }
+    private EnemyType _type;
+
+    private float _tigerRange = 10.0f;
+    private float _monkeyRange = 10.0f;
+    private float _craneRange = 10.0f;
 
     public float perceptionRange = 50.0f;
 
@@ -55,10 +69,26 @@ public class EnemyAI : MonoBehaviour
 	void Start () {
         _samurai = GetComponent<Samurai>();
         _agent = GetComponent<NavMeshAgent>();
+
+        var possibleTypes = Enum.GetValues(typeof(EnemyType));
+        _type = (EnemyType)possibleTypes.GetValue(UnityEngine.Random.Range(0, possibleTypes.Length));
+
+        _currentAttackPreference = AttackPreference.RandomPlayer;
+        
 	}
 	
 	// Update is called once per frame
 	void Update () {
-        _agent.SetDestination(AcquireTarget(_currentAttackPreference).transform.position);
+        if (!_targetSet)
+        {
+            _target = AcquireTarget(_currentAttackPreference);
+            if (_target != null)
+                _agent.SetDestination(_target.transform.position);
+            _targetSet = true;
+        }
+        else
+        {
+            _agent.SetDestination(_target.transform.position);
+        }
 	}
 }
