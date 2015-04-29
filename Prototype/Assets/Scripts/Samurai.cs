@@ -11,11 +11,7 @@ public class Samurai : MonoBehaviour {
     public int Crane;
     //public int Honor;
     //public int Glory;
-
-    public float dashTimer;
-    public float dashTime;
-    public float dashCooldown;
-    public float dashCooldownTimer;
+    private int fieldOfView;
 
     public int Health;
     public Action currentAction;
@@ -35,11 +31,8 @@ public class Samurai : MonoBehaviour {
         Health = 2;
         Tiger = /*Honor = Glory = */Monkey = Crane = 1;
         CurrentBodyState = BodyState.Idle;
-        dashTime = 0.3f;
-        dashTimer = 0.0f;
-        dashCooldown = 2.0f;
-        dashCooldownTimer = 2.0f;
         CreateActions(false);
+        fieldOfView = 60;
 	}
 	
 	// Update is called once per frame
@@ -75,5 +68,13 @@ public class Samurai : MonoBehaviour {
         actions.Add("Dash", d);
     }
 
-    
+    public int GetFieldOfView()
+    {
+        return fieldOfView;
+    }
+
+    public void TakeDamage(int damage)
+    {
+        Health -= damage;
+    }
 }
