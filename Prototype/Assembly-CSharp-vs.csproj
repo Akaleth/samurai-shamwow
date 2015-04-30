@@ -54,10 +54,6 @@
      <Compile Include="Assets\Scripts\EventManager.cs" />
      <Compile Include="Assets\Scripts\GameManager.cs" />
      <Compile Include="Assets\Scripts\Player.cs" />
-     <Compile Include="Assets\Scripts\Player.cs.BACKUP.6224.cs" />
-     <Compile Include="Assets\Scripts\Player.cs.BASE.6224.cs" />
-     <Compile Include="Assets\Scripts\Player.cs.LOCAL.6224.cs" />
-     <Compile Include="Assets\Scripts\Player.cs.REMOTE.6224.cs" />
      <Compile Include="Assets\Scripts\PlayerSamurai.cs" />
      <Compile Include="Assets\Scripts\Samurai.cs" />
      <Compile Include="Assets\Scripts\SpawnPoint.cs" />
@@ -65,7 +61,7 @@
      <Compile Include="Assets\Scripts\Villager.cs" />
      <None Include="Assets\Standard Assets\Water (Basic)\Sources\Shaders\FX-Water Simple.shader" />
  <Reference Include="Assembly-UnityScript-firstpass">
- <HintPath>D:/Users/emm1291/everyonedie/samurai-shamwow/Prototype/Library/ScriptAssemblies/Assembly-UnityScript-firstpass.dll</HintPath>
+ <HintPath>C:/Users/Loucks/Documents/samurai-shamwow/Prototype/Library/ScriptAssemblies/Assembly-UnityScript-firstpass.dll</HintPath>
  </Reference>
  <Reference Include="UnityEngine.UI">
  <HintPath>C:/Program Files/Unity/Editor/Data/UnityExtensions/Unity/GUISystem/UnityEngine.UI.dll</HintPath>

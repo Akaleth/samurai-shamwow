@@ -38,8 +38,11 @@ public class Player : MonoBehaviour {
         // Left mouse button pressed
         if (Input.GetMouseButtonDown(0))
         {
-			MyAnimator.SetBool("attack", true);
-            MySamurai.Attack();
+			Attack a = MySamurai.actions["Attack"] as Attack;
+			if(a.ActionReady())
+			{
+				a.DoAction();
+			}
         }
 
         if (Input.GetKeyDown(KeyCode.E))
@@ -66,18 +69,21 @@ public class Player : MonoBehaviour {
         {
             case Samurai.BodyState.Idle:
 				MyAnimator.SetBool("attack", false);
+				MyAnimator.SetBool("dash", false);
                 break;
             case Samurai.BodyState.Attacking:
+				MyAnimator.SetBool("attack", true);
                 break;
             case Samurai.BodyState.Dashing:
-                if (MySamurai.dashTimer == MySamurai.dashTime)
+				MyAnimator.SetBool("dash", true);
+                /*if (MySamurai.dashTimer == MySamurai.dashTime)
                 {
                     MySamurai.CurrentBodyState = Samurai.BodyState.Idle;
                 }
                 else
                 {
 
-                }
+                }*/
                 break;
             case Samurai.BodyState.Parrying:
                 break;

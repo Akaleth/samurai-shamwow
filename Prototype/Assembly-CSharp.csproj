@@ -54,10 +54,6 @@
      <Compile Include="Assets\Scripts\EventManager.cs" />
      <Compile Include="Assets\Scripts\GameManager.cs" />
      <Compile Include="Assets\Scripts\Player.cs" />
-     <Compile Include="Assets\Scripts\Player.cs.BACKUP.6224.cs" />
-     <Compile Include="Assets\Scripts\Player.cs.BASE.6224.cs" />
-     <Compile Include="Assets\Scripts\Player.cs.LOCAL.6224.cs" />
-     <Compile Include="Assets\Scripts\Player.cs.REMOTE.6224.cs" />
      <Compile Include="Assets\Scripts\PlayerSamurai.cs" />
      <Compile Include="Assets\Scripts\Samurai.cs" />
      <Compile Include="Assets\Scripts\SpawnPoint.cs" />
