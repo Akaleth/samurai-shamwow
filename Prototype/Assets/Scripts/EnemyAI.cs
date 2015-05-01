@@ -13,6 +13,8 @@ public class EnemyAI : MonoBehaviour
     private GameObject _target;
     private bool _targetSet = false;
 
+    public GameObject Lieutenant = null;
+
     public enum EnemyType
     {
         Tiger,
@@ -25,7 +27,9 @@ public class EnemyAI : MonoBehaviour
     private float _monkeyRange = 10.0f;
     private float _craneRange = 10.0f;
 
-    public float perceptionRange = 50.0f;
+    public float PerceptionRange = 50.0f;
+    public float AttackRange = 5.0f;
+    public float AttackCooldown = 1.0f;
 
     public enum AttackPreference
     {
@@ -39,7 +43,12 @@ public class EnemyAI : MonoBehaviour
         Library
     }
 
-    private AttackPreference _currentAttackPreference = AttackPreference.RandomPlayer;
+    public AttackPreference _currentAttackPreference = AttackPreference.RandomPlayer;
+
+    public bool TargetIsInRange()
+    {
+        return Vector3.Distance(this.transform.position, _target.transform.position) <= AttackRange;
+    }
 
     public GameObject AcquireTarget(AttackPreference pref)
     {
@@ -54,7 +63,7 @@ public class EnemyAI : MonoBehaviour
             case AttackPreference.RandomPlayer:
                 return GameManager.RandomPlayer(this.gameObject);
             case AttackPreference.RandomVillager:
-                return GameManager.RandomVillager(this.gameObject, perceptionRange);
+                return GameManager.RandomVillager(this.gameObject, PerceptionRange);
             case AttackPreference.ClosestPlayer:
                 return GameManager.ClosestPlayer(this.gameObject);
             case AttackPreference.ClosestVillager:
