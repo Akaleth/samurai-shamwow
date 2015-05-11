@@ -13,6 +13,14 @@ public class Attack : Action {
     {
         base.DoAction();
         owner.CurrentBodyState = Samurai.BodyState.Attacking;
+		Transform[] children = owner.GetComponentsInChildren<Transform>();
+		foreach(Transform child in children)
+		{
+			if (child.gameObject.name == "Sword")
+			{
+				child.GetComponent<BoxCollider>().enabled = true;
+			}
+		}
 	}
 	
 	// Update is called once per frame
@@ -28,5 +36,13 @@ public class Attack : Action {
     public override void End()
     {
         base.End();
+		Transform[] children = owner.GetComponentsInChildren<Transform>();
+		foreach(Transform child in children)
+		{
+			if (child.gameObject.name == "Sword")
+			{
+				child.GetComponent<BoxCollider>().enabled = false;
+			}
+		}
     }
 }

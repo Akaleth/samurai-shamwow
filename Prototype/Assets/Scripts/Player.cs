@@ -42,6 +42,7 @@ public class Player : MonoBehaviour {
 			if(a.ActionReady())
 			{
 				a.DoAction();
+				StealthOff();
 			}
         }
 
@@ -76,14 +77,6 @@ public class Player : MonoBehaviour {
                 break;
             case Samurai.BodyState.Dashing:
 				MyAnimator.SetBool("dash", true);
-                /*if (MySamurai.dashTimer == MySamurai.dashTime)
-                {
-                    MySamurai.CurrentBodyState = Samurai.BodyState.Idle;
-                }
-                else
-                {
-
-                }*/
                 break;
             case Samurai.BodyState.Parrying:
                 break;

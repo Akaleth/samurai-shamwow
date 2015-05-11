@@ -66,8 +66,8 @@ public class Samurai : MonoBehaviour {
         actions = new Dictionary<string, Action>();
         Dash d = new Dash(1.5f, 0.3f, this, playerAction);
         actions.Add("Dash", d);
-		Attack a = new Attack (1.5f, 0.3f, this, playerAction);
-		actions.Add ("Attack", a);
+		Attack a = new Attack (1.5f, 0.6f, this, playerAction);
+		actions.Add("Attack", a);
     }
 
     public int GetFieldOfView()
