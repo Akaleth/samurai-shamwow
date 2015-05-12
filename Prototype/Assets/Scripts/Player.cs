@@ -34,9 +34,10 @@ public class Player : MonoBehaviour {
 		float horiz = Input.GetAxis("Horizontal");
 		float vert = Input.GetAxis("Vertical");
 		MyAnimator.SetFloat("run", vert);
+		MyAnimator.SetFloat("strafe", horiz);
 
         // Left mouse button pressed
-        if (Input.GetMouseButtonDown(0))
+        if (Input.GetMouseButtonDown(0) /*|| Input.GetButtonDown("Fire2")*/)
         {
 			Attack a = MySamurai.actions["Attack"] as Attack;
 			if(a.ActionReady())
@@ -46,7 +47,7 @@ public class Player : MonoBehaviour {
 			}
         }
 
-        if (Input.GetKeyDown(KeyCode.E))
+        if (Input.GetKeyDown(KeyCode.E) /*|| Input.GetButtonDown("Fire1")*/)
         {
             Dash d = MySamurai.actions["Dash"] as Dash;
             if (d.ActionReady())
