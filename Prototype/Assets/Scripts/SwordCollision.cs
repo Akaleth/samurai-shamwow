@@ -3,6 +3,8 @@ using System.Collections;
 
 public class SwordCollision : MonoBehaviour {
 
+	public GameObject player;
+
 	// Use this for initialization
 	void Start () {
 	
@@ -13,13 +15,20 @@ public class SwordCollision : MonoBehaviour {
 	
 	}
 
-	void OnCollisonEnter(Collision col)
+	void OnTriggerStay(Collider col)
 	{
-		if(col.gameObject.name == "Samurai")
+		if(col.gameObject.GetComponent<EnemyAI>())
 		{
+			var anim = player.GetComponent<Animator>();
+			if(anim.GetFloat("swordActivation") >= 0.95)
+			{
+				Debug.Log("BLAP BLAP FOR REAL");
+				col.gameObject.GetComponent<Samurai>().TakeDamage(1);
+			}
+			//Debug.Log (anim.GetFloat("swordActivation"));
 			// deal damage to target based on tiger stat
 
 		}
-		Debug.Log("BLAP BLAP");
+		//Debug.Log("BLAP BLAP");
 	}
 }

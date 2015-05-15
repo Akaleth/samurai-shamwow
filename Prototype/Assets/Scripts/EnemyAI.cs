@@ -92,8 +92,10 @@ public class EnemyAI : MonoBehaviour
         {
             _target = AcquireTarget(_currentAttackPreference);
             if (_target != null)
+			{
                 _agent.SetDestination(_target.transform.position);
-            _targetSet = true;
+            	_targetSet = true;
+			}
         }
         else
         {

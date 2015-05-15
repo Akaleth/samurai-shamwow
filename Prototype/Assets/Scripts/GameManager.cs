@@ -126,7 +126,7 @@ public class GameManager : MonoBehaviour
 	void Start () 
     {
         Villagers = new List<Villager>().Where(x => x.tag == "Villager").ToList();
-        Players = new List<Samurai> { Player1, Player2, Player3, Player4 };
+        Players = new List<Samurai> { Player1 };
 	}
 	
 	// Update is called once per frame

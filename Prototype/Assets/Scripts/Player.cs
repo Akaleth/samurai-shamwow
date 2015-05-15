@@ -9,7 +9,7 @@ public class Player : MonoBehaviour {
     private float stealthCooldownTimer;
 
     private Samurai MySamurai;
-	public Animator MyAnimator;
+	//public Animator MyAnimator;
 
 	// Use this for initialization
 	void Start () {
@@ -21,7 +21,7 @@ public class Player : MonoBehaviour {
         stealthed = false;
         stealthCooldown = 10.0f;
         stealthCooldownTimer = 10.0f;
-		MyAnimator = GetComponent<Animator> ();
+		MySamurai.MyAnimator = GetComponent<Animator> ();
 	}
 	
 	// Update is called once per frame
@@ -33,8 +33,8 @@ public class Player : MonoBehaviour {
 
 		float horiz = Input.GetAxis("Horizontal");
 		float vert = Input.GetAxis("Vertical");
-		MyAnimator.SetFloat("run", vert);
-		MyAnimator.SetFloat("strafe", horiz);
+		MySamurai.MyAnimator.SetFloat("run", vert);
+		MySamurai.MyAnimator.SetFloat("strafe", horiz);
 
         // Left mouse button pressed
         if (Input.GetMouseButtonDown(0) /*|| Input.GetButtonDown("Fire2")*/)
@@ -70,14 +70,14 @@ public class Player : MonoBehaviour {
         switch (MySamurai.CurrentBodyState)
         {
             case Samurai.BodyState.Idle:
-				MyAnimator.SetBool("attack", false);
-				MyAnimator.SetBool("dash", false);
+				MySamurai.MyAnimator.SetBool("attack", false);
+				MySamurai.MyAnimator.SetBool("dash", false);
                 break;
             case Samurai.BodyState.Attacking:
-				MyAnimator.SetBool("attack", true);
+			    MySamurai.MyAnimator.SetBool("attack", true);
                 break;
             case Samurai.BodyState.Dashing:
-				MyAnimator.SetBool("dash", true);
+			    MySamurai.MyAnimator.SetBool("dash", true);
                 break;
             case Samurai.BodyState.Parrying:
                 break;

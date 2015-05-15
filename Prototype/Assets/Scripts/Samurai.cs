@@ -6,6 +6,8 @@ public class Samurai : MonoBehaviour {
 
     public bool IsPlayer = false;
 
+	public InvulnFrames iframes;
+
     public int Tiger;
     public int Monkey;
     public int Crane;
@@ -19,6 +21,9 @@ public class Samurai : MonoBehaviour {
 
     public Dictionary<string, Action> actions;
 
+	private bool isAlive;
+	public Animator MyAnimator;
+
     public enum BodyState
     {
         Idle, Attacking, Dashing, Parrying, Stunned,
@@ -28,16 +33,20 @@ public class Samurai : MonoBehaviour {
 
 	// Use this for initialization
 	void Start () {
-        Health = 2;
+        Health = 50;
         Tiger = /*Honor = Glory = */Monkey = Crane = 1;
         CurrentBodyState = BodyState.Idle;
         CreateActions(false);
         fieldOfView = 60;
+		isAlive = true;
+
+		iframes = GetComponent<InvulnFrames>();
 	}
 	
 	// Update is called once per frame
 	void Update () {
-	
+		if(Health <= 0)
+			Die();
 	}
 
     public void Charge()
@@ -78,5 +87,13 @@ public class Samurai : MonoBehaviour {
     public void TakeDamage(int damage)
     {
         Health -= damage;
+		iframes.enabled = true;
     }
+
+	public void Die()
+	{
+		isAlive = false;
+		//MyAnimator.SetBool("death", true);
+		Destroy (this.gameObject);
+	}
 }
