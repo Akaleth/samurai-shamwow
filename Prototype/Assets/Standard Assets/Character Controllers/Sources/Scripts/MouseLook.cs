@@ -22,6 +22,9 @@ public class MouseLook : MonoBehaviour {
 	public float sensitivityX = 15F;
 	public float sensitivityY = 15F;
 
+	public float joystickSensitivityX = 5F;
+	public float joystickSensitivityY = 5F;
+
 	public float minimumX = -360F;
 	public float maximumX = 360F;
 
@@ -32,6 +35,9 @@ public class MouseLook : MonoBehaviour {
 
 	void Update ()
 	{
+		float Xon = Mathf.Abs (Input.GetAxis("Joystick X"));
+		float Yon = Mathf.Abs (Input.GetAxis("Joystick Y"));
+
 		if (axes == RotationAxes.MouseXAndY)
 		{
 			float rotationX = transform.localEulerAngles.y + Input.GetAxis("Mouse X") * sensitivityX;
@@ -43,10 +49,18 @@ public class MouseLook : MonoBehaviour {
 		}
 		else if (axes == RotationAxes.MouseX)
 		{
+			if(Xon>.05)
+			{
+				transform.Rotate (0, Input.GetAxis("Joystick X") * joystickSensitivityX, 0);
+			}
 			transform.Rotate(0, Input.GetAxis("Mouse X") * sensitivityX, 0);
 		}
 		else
 		{
+			if(Yon>.05)
+			{
+				rotationY += Input.GetAxis("Joystick Y") * joystickSensitivityY;
+			}
 			rotationY += Input.GetAxis("Mouse Y") * sensitivityY;
 			rotationY = Mathf.Clamp (rotationY, minimumY, maximumY);
 			

@@ -93,7 +93,7 @@ public class Samurai : MonoBehaviour {
 	public void Die()
 	{
 		isAlive = false;
-		//MyAnimator.SetBool("death", true);
+		MyAnimator.SetBool("death", true);
 		Destroy (this.gameObject);
 	}
 }
