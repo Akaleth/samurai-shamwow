@@ -5,13 +5,13 @@ public class InvulnFrames : MonoBehaviour {
 
 	public float duration;
 	private float durationCounter;
-	private MeshRenderer mesh;
+	public SkinnedMeshRenderer mesh;
 	public bool enabled;
 
 	// Use this for initialization
 	void Start () {
 		enabled = false;
-		mesh = GetComponent<MeshRenderer>();
+		//mesh = GetComponentInChildren<SkinnedMeshRenderer>();
 		duration = 1.0f;
 	}
 	
