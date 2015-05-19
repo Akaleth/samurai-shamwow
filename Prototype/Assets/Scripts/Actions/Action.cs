@@ -26,7 +26,7 @@ public class Action
 	// Use this for initialization
 	public virtual void DoAction()
     {
-        if (!active && cooldownTimer >= cooldown)
+        if (!active && cooldownTimer >= cooldown && owner.currentAction == null)
         {
             active = true;
             cooldownTimer = 0.0f;

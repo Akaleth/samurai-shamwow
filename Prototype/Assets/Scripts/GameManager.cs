@@ -10,13 +10,17 @@ public class GameManager : MonoBehaviour
     public Samurai Player3;
     public Samurai Player4;
 
+    public GameObject VillagerObject;
+
 	private bool _initialized = false;
 
     public static List<Samurai> Players;
     public static int NumPlayers = 4;
 
-    public static List<Villager> Villagers;
+    public static List<GameObject> Villagers;
     public static int NumVillagers = 40;
+
+    public static int NumEnemies = 15;
 
     public static GameObject Blacksmith;
     public static GameObject Library;
@@ -102,7 +106,7 @@ public class GameManager : MonoBehaviour
 
     public static GameObject WeakestPlayer(GameObject caller)
     {
-        return Players.OrderBy(x => x.Health).ElementAt(0).transform.gameObject;
+        return Players.OrderBy(x => x.GetComponent<Health>().health).ElementAt(0).transform.gameObject;
     }
 
     public static GameObject RandomPlayer(GameObject caller)
@@ -125,8 +129,9 @@ public class GameManager : MonoBehaviour
 	// Use this for initialization
 	void Start () 
     {
-        Villagers = new List<Villager>().Where(x => x.tag == "Villager").ToList();
+        Villagers = new List<GameObject>();
         Players = new List<Samurai> { Player1 };
+        SpawnVillagers();
 	}
 	
 	// Update is called once per frame
@@ -134,4 +139,21 @@ public class GameManager : MonoBehaviour
     {
 
 	}
+
+    public void SpawnVillagers()
+    {
+        for (int i = 0; i < NumVillagers; i++)
+        {
+            var randomDirection = Random.insideUnitSphere * 100;
+            NavMeshHit hit;
+            NavMesh.SamplePosition(randomDirection, out hit, 100, 1);
+            Villagers.Add((GameObject)(Instantiate(VillagerObject, hit.position, Quaternion.identity)));
+        }
+    }
+
+    public void SomebodyDied()
+    {
+        NumVillagers--;
+        NumEnemies++;
+    }
 }
