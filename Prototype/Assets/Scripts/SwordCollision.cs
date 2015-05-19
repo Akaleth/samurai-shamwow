@@ -19,6 +19,8 @@ public class SwordCollision : MonoBehaviour {
 	{
         if ((col.gameObject.GetComponent<EnemyAI>() && !gameObject.GetComponent<EnemyAI>()) || (!col.gameObject.GetComponent<EnemyAI>() && gameObject.GetComponent<EnemyAI>()))
 		{
+            if (col.gameObject.GetComponent<Samurai>().parrying)
+                return;
 			var anim = player.GetComponent<Animator>();
 			if(anim.GetFloat("swordActivation") >= 0.95)
 			{

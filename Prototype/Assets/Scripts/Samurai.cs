@@ -19,6 +19,8 @@ public class Samurai : MonoBehaviour {
     private float stealthCooldown;
     private float stealthCooldownTimer;
 
+    public bool parrying = false;
+
     public Action currentAction;
     public Dictionary<string, Action> readyActions;
 
@@ -62,14 +64,18 @@ public class Samurai : MonoBehaviour {
             case Samurai.BodyState.Idle:
                 MyAnimator.SetBool("attack", false);
                 MyAnimator.SetBool("dash", false);
+                MyAnimator.SetBool("parry", false);
                 break;
             case Samurai.BodyState.Attacking:
                 MyAnimator.SetBool("attack", true);
+                MyAnimator.SetBool("parry", false);
                 break;
             case Samurai.BodyState.Dashing:
                 MyAnimator.SetBool("dash", true);
+                MyAnimator.SetBool("parry", false);
                 break;
             case Samurai.BodyState.Parrying:
+				MyAnimator.SetBool("parry", true);
                 break;
             case Samurai.BodyState.Stunned: // Crane parry
                 break;
@@ -104,8 +110,10 @@ public class Samurai : MonoBehaviour {
         actions = new Dictionary<string, Action>();
         Dash d = new Dash(1.5f, 0.3f, this, playerAction);
         actions.Add("Dash", d);
-		Attack a = new Attack (1.5f, 0.6f, this, playerAction);
+		Attack a = new Attack (0.6f, 0.4f, this, playerAction);
 		actions.Add("Attack", a);
+        Parry p = new Parry(1.0f, 1.0f, this, playerAction);
+        actions.Add("Parry", p);
     }
 
     public int GetFieldOfView()
@@ -164,6 +172,16 @@ public class Samurai : MonoBehaviour {
             StealthOff();
         }
     }
+
+	public void DoParry()
+	{
+		Parry p = actions ["Parry"] as Parry;
+		if (p.ActionReady ())
+		{
+			p.DoAction();
+			StealthOff ();
+		}
+	}
 
     void CheckMonkeyHit(Samurai target)
     {

@@ -82,7 +82,7 @@ public class EnemyAI : MonoBehaviour
         var possibleTypes = Enum.GetValues(typeof(EnemyType));
         _type = (EnemyType)possibleTypes.GetValue(UnityEngine.Random.Range(0, possibleTypes.Length));
 
-        _currentAttackPreference = AttackPreference.RandomVillager;
+        _currentAttackPreference = AttackPreference.RandomPlayer;
         
 	}
 	

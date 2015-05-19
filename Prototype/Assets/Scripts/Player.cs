@@ -46,6 +46,12 @@ public class Player : MonoBehaviour {
             MySamurai.DoMonkey();
         }
 
+		if (Input.GetButtonDown ("Jump")) 
+		{
+			MySamurai.DoParry();
+		}
+
+
         if (Input.GetKeyDown(KeyCode.R) && stealthCooldownTimer >= stealthCooldown)
         {
             MySamurai.StealthOn();
