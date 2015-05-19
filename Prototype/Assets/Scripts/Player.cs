@@ -18,7 +18,7 @@ public class Player : MonoBehaviour {
         MySamurai.CreateActions(true);
 
         Cursor.visible = false;
-        stealthed = false;
+        
         stealthCooldown = 10.0f;
         stealthCooldownTimer = 10.0f;
 		MySamurai.MyAnimator = GetComponent<Animator> ();
@@ -43,7 +43,7 @@ public class Player : MonoBehaviour {
 			if(a.ActionReady())
 			{
 				a.DoAction();
-				StealthOff();
+				MySamurai.StealthOff();
 			}
         }
 
@@ -53,13 +53,13 @@ public class Player : MonoBehaviour {
             if (d.ActionReady())
             {
                 d.DoAction();
-                StealthOff();
+                MySamurai.StealthOff();
             }
         }
 
         if (Input.GetKeyDown(KeyCode.R) && stealthCooldownTimer >= stealthCooldown)
         {
-            StealthOn();
+            MySamurai.StealthOn();
         }
 
         foreach (string k in MySamurai.actions.Keys)
@@ -103,22 +103,5 @@ public class Player : MonoBehaviour {
         }
     }
 
-    void StealthOn()
-    {
-        if (!stealthed)
-        {
-            stealthed = true;
-            MySamurai.GetComponent<CharacterMotor>().movement.maxForwardSpeed = 15.0f;
-        }
-    }
-
-    void StealthOff()
-    {
-        if (stealthed)
-        {
-            stealthed = false;
-            MySamurai.GetComponent<CharacterMotor>().movement.maxForwardSpeed = 10.0f;
-            stealthCooldownTimer = 0.0f;
-        }
-    }
+    
 }
