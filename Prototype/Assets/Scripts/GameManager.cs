@@ -106,7 +106,7 @@ public class GameManager : MonoBehaviour
 
     public static GameObject WeakestPlayer(GameObject caller)
     {
-        return Players.OrderBy(x => x.Health).ElementAt(0).transform.gameObject;
+        return Players.OrderBy(x => x.GetComponent<Health>().health).ElementAt(0).transform.gameObject;
     }
 
     public static GameObject RandomPlayer(GameObject caller)
