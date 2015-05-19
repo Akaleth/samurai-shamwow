@@ -82,7 +82,7 @@ public class EnemyAI : MonoBehaviour
         var possibleTypes = Enum.GetValues(typeof(EnemyType));
         _type = (EnemyType)possibleTypes.GetValue(UnityEngine.Random.Range(0, possibleTypes.Length));
 
-        _currentAttackPreference = AttackPreference.RandomPlayer;
+        _currentAttackPreference = AttackPreference.RandomVillager;
         
 	}
 	
@@ -100,6 +100,7 @@ public class EnemyAI : MonoBehaviour
         else
         {
             _agent.SetDestination(_target.transform.position);
+			_samurai.MyAnimator.SetFloat("run", _agent.velocity.magnitude > 0 ? 1 : 0);
             if (TargetIsInRange())
             {
                 AttackTarget();

@@ -28,7 +28,7 @@ public class Dash : Action {
         {
             Vector3 moveDir = owner.transform.forward;
             moveDir.y = 0.0f;
-            owner.GetComponent<CharacterController>().Move(moveDir * 0.5f);
+            owner.transform.position += moveDir * 6f * Time.deltaTime;
         }
 	}
 

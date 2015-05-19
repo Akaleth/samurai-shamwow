@@ -51,10 +51,6 @@ public class Samurai : MonoBehaviour {
 		if(GetComponent<Health>().health == 0)
 			Die();
 
-        float horiz = Input.GetAxis("Horizontal");
-        float vert = Input.GetAxis("Vertical");
-        MyAnimator.SetFloat("run", vert);
-        MyAnimator.SetFloat("strafe", horiz);
 
         foreach (string k in actions.Keys)
         {
@@ -122,6 +118,11 @@ public class Samurai : MonoBehaviour {
 	{
 		isAlive = false;
 		MyAnimator.SetBool("death", true);
+		//Destroy (this.gameObject);
+	}
+
+	public void DestroySamurai()
+	{
 		Destroy (this.gameObject);
 	}
 

@@ -17,7 +17,7 @@ public class SwordCollision : MonoBehaviour {
 
 	void OnTriggerStay(Collider col)
 	{
-        if ((col.gameObject.GetComponent<EnemyAI>() && !gameObject.GetComponent<EnemyAI>()) || !(col.gameObject.GetComponent<EnemyAI>() && gameObject.GetComponent<EnemyAI>()))
+        if ((col.gameObject.GetComponent<EnemyAI>() && !gameObject.GetComponent<EnemyAI>()) || (!col.gameObject.GetComponent<EnemyAI>() && gameObject.GetComponent<EnemyAI>()))
 		{
 			var anim = player.GetComponent<Animator>();
 			if(anim.GetFloat("swordActivation") >= 0.95)

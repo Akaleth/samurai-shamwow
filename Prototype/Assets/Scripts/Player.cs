@@ -20,10 +20,16 @@ public class Player : MonoBehaviour {
         
         stealthCooldown = 10.0f;
         stealthCooldownTimer = 10.0f;
+
 	}
 	
 	// Update is called once per frame
 	void Update () {
+		float horiz = Input.GetAxis("Horizontal");
+		float vert = Input.GetAxis("Vertical");
+		MySamurai.MyAnimator.SetFloat("run", vert);
+		MySamurai.MyAnimator.SetFloat("strafe", horiz);
+
         if (stealthCooldownTimer <= stealthCooldown && !stealthed)
         {
             stealthCooldownTimer += Time.deltaTime;
