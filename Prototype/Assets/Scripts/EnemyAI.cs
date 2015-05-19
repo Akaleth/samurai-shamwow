@@ -100,6 +100,33 @@ public class EnemyAI : MonoBehaviour
         else
         {
             _agent.SetDestination(_target.transform.position);
+            if (TargetIsInRange())
+            {
+                AttackTarget();
+            }
         }
 	}
+
+    void AttackTarget()
+    {
+        switch (_type)
+        {
+            case EnemyType.Monkey:
+                Dash d = _samurai.actions["Dash"] as Dash;
+                if (d.ActionReady())
+                {
+                    d.DoAction();
+                    _samurai.StealthOff();
+                }
+                break;
+            case EnemyType.Tiger:
+                Attack a = _samurai.actions["Attack"] as Attack;
+                if (a.ActionReady())
+                {
+                    a.DoAction();
+                    _samurai.StealthOff();
+                }
+                break;
+        }
+    }
 }

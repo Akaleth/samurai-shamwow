@@ -15,6 +15,10 @@ public class Samurai : MonoBehaviour {
     //public int Glory;
     private int fieldOfView;
 
+    bool stealthed = false;
+    private float stealthCooldown;
+    private float stealthCooldownTimer;
+
     public int Health;
     public Action currentAction;
     public Dictionary<string, Action> readyActions;
@@ -96,4 +100,23 @@ public class Samurai : MonoBehaviour {
 		MyAnimator.SetBool("death", true);
 		Destroy (this.gameObject);
 	}
+
+    public void StealthOn()
+    {
+        if (!stealthed)
+        {
+            stealthed = true;
+            GetComponent<CharacterMotor>().movement.maxForwardSpeed = 15.0f;
+        }
+    }
+
+    public void StealthOff()
+    {
+        if (stealthed)
+        {
+            stealthed = false;
+            GetComponent<CharacterMotor>().movement.maxForwardSpeed = 10.0f;
+            stealthCooldownTimer = 0.0f;
+        }
+    }
 }
