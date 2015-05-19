@@ -23,7 +23,7 @@ public class SwordCollision : MonoBehaviour {
 			if(anim.GetFloat("swordActivation") >= 0.95)
 			{
 				Debug.Log("BLAP BLAP FOR REAL");
-				col.gameObject.GetComponent<Samurai>().TakeDamage(1);
+				col.gameObject.GetComponent<Samurai>().GetComponent<Health>().TakeDamage(1);
 			}
 			//Debug.Log (anim.GetFloat("swordActivation"));
 			// deal damage to target based on tiger stat

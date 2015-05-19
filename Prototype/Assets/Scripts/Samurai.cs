@@ -19,7 +19,6 @@ public class Samurai : MonoBehaviour {
     private float stealthCooldown;
     private float stealthCooldownTimer;
 
-    public int Health;
     public Action currentAction;
     public Dictionary<string, Action> readyActions;
 
@@ -37,7 +36,6 @@ public class Samurai : MonoBehaviour {
 
 	// Use this for initialization
 	void Start () {
-        Health = 50;
         Tiger = /*Honor = Glory = */Monkey = Crane = 1;
         CurrentBodyState = BodyState.Idle;
         CreateActions(false);
@@ -49,7 +47,7 @@ public class Samurai : MonoBehaviour {
 	
 	// Update is called once per frame
 	void Update () {
-		if(Health <= 0)
+		if(GetComponent<Health>().health == 0)
 			Die();
 	}
 
@@ -88,11 +86,6 @@ public class Samurai : MonoBehaviour {
         return fieldOfView;
     }
 
-    public void TakeDamage(int damage)
-    {
-        Health -= damage;
-		iframes.enabled = true;
-    }
 
 	public void Die()
 	{
