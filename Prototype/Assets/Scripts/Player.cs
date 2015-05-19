@@ -9,7 +9,6 @@ public class Player : MonoBehaviour {
     private float stealthCooldownTimer;
 
     private Samurai MySamurai;
-	//public Animator MyAnimator;
 
 	// Use this for initialization
 	void Start () {
@@ -21,7 +20,6 @@ public class Player : MonoBehaviour {
         
         stealthCooldown = 10.0f;
         stealthCooldownTimer = 10.0f;
-		MySamurai.MyAnimator = GetComponent<Animator> ();
 	}
 	
 	// Update is called once per frame
@@ -31,77 +29,24 @@ public class Player : MonoBehaviour {
             stealthCooldownTimer += Time.deltaTime;
         }
 
-		float horiz = Input.GetAxis("Horizontal");
-		float vert = Input.GetAxis("Vertical");
-		MySamurai.MyAnimator.SetFloat("run", vert);
-		MySamurai.MyAnimator.SetFloat("strafe", horiz);
-
         // Left mouse button pressed
         if (Input.GetMouseButtonDown(0) || Input.GetButtonDown("Fire2"))
         {
-			Attack a = MySamurai.actions["Attack"] as Attack;
-			if(a.ActionReady())
-			{
-				a.DoAction();
-				MySamurai.StealthOff();
-			}
+            MySamurai.DoTiger();
         }
 
         if (Input.GetKeyDown(KeyCode.E) || Input.GetButtonDown("Fire3"))
         {
-            Dash d = MySamurai.actions["Dash"] as Dash;
-            if (d.ActionReady())
-            {
-                d.DoAction();
-                MySamurai.StealthOff();
-            }
+            MySamurai.DoMonkey();
         }
 
         if (Input.GetKeyDown(KeyCode.R) && stealthCooldownTimer >= stealthCooldown)
         {
             MySamurai.StealthOn();
         }
-
-        foreach (string k in MySamurai.actions.Keys)
-        {
-            MySamurai.actions[k].Update();
-        }
-		
-        switch (MySamurai.CurrentBodyState)
-        {
-            case Samurai.BodyState.Idle:
-				MySamurai.MyAnimator.SetBool("attack", false);
-				MySamurai.MyAnimator.SetBool("dash", false);
-                break;
-            case Samurai.BodyState.Attacking:
-			    MySamurai.MyAnimator.SetBool("attack", true);
-                break;
-            case Samurai.BodyState.Dashing:
-			    MySamurai.MyAnimator.SetBool("dash", true);
-                break;
-            case Samurai.BodyState.Parrying:
-                break;
-            case Samurai.BodyState.Stunned: // Crane parry
-                break;
-            default:
-                break;
-        }
 	}
 
-    void CheckMonkeyHit(Samurai target)
-    {
-        Plane[] planes = GeometryUtility.CalculateFrustumPlanes(GetComponent<Camera>());
-        Collider collider = target.GetComponent<Collider>();
 
-        if (GeometryUtility.TestPlanesAABB(planes, collider.bounds))
-        {
-            if (Vector3.Angle(target.transform.forward, target.transform.position - this.transform.position) <= target.GetFieldOfView() / 2)
-            {
-                // Monkey hit is successful
-                // target.TakeDamage(monkeyDamage);
-            }
-        }
-    }
 
     
 }

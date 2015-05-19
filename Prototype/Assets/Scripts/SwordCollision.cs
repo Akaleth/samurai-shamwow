@@ -17,7 +17,7 @@ public class SwordCollision : MonoBehaviour {
 
 	void OnTriggerStay(Collider col)
 	{
-		if(col.gameObject.GetComponent<EnemyAI>())
+        if ((col.gameObject.GetComponent<EnemyAI>() && !gameObject.GetComponent<EnemyAI>()) || !(col.gameObject.GetComponent<EnemyAI>() && gameObject.GetComponent<EnemyAI>()))
 		{
 			var anim = player.GetComponent<Animator>();
 			if(anim.GetFloat("swordActivation") >= 0.95)
@@ -25,10 +25,8 @@ public class SwordCollision : MonoBehaviour {
 				Debug.Log("BLAP BLAP FOR REAL");
 				col.gameObject.GetComponent<Samurai>().TakeDamage(1);
 			}
-			//Debug.Log (anim.GetFloat("swordActivation"));
 			// deal damage to target based on tiger stat
 
 		}
-		//Debug.Log("BLAP BLAP");
 	}
 }

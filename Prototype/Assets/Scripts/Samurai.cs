@@ -44,6 +44,7 @@ public class Samurai : MonoBehaviour {
         fieldOfView = 60;
 		isAlive = true;
 
+        MyAnimator = GetComponent<Animator>();
 		iframes = GetComponent<InvulnFrames>();
 	}
 	
@@ -51,6 +52,36 @@ public class Samurai : MonoBehaviour {
 	void Update () {
 		if(Health <= 0)
 			Die();
+
+        float horiz = Input.GetAxis("Horizontal");
+        float vert = Input.GetAxis("Vertical");
+        MyAnimator.SetFloat("run", vert);
+        MyAnimator.SetFloat("strafe", horiz);
+
+        foreach (string k in actions.Keys)
+        {
+            actions[k].Update();
+        }
+
+        switch (CurrentBodyState)
+        {
+            case Samurai.BodyState.Idle:
+                MyAnimator.SetBool("attack", false);
+                MyAnimator.SetBool("dash", false);
+                break;
+            case Samurai.BodyState.Attacking:
+                MyAnimator.SetBool("attack", true);
+                break;
+            case Samurai.BodyState.Dashing:
+                MyAnimator.SetBool("dash", true);
+                break;
+            case Samurai.BodyState.Parrying:
+                break;
+            case Samurai.BodyState.Stunned: // Crane parry
+                break;
+            default:
+                break;
+        }
 	}
 
     public void Charge()
@@ -117,6 +148,41 @@ public class Samurai : MonoBehaviour {
             stealthed = false;
             GetComponent<CharacterMotor>().movement.maxForwardSpeed = 10.0f;
             stealthCooldownTimer = 0.0f;
+        }
+    }
+
+    public void DoTiger()
+    {
+        Attack a = actions["Attack"] as Attack;
+        if (a.ActionReady())
+        {
+            a.DoAction();
+            StealthOff();
+        }
+    }
+
+    public void DoMonkey()
+    {
+        Dash d = actions["Dash"] as Dash;
+        if (d.ActionReady())
+        {
+            d.DoAction();
+            StealthOff();
+        }
+    }
+
+    void CheckMonkeyHit(Samurai target)
+    {
+        Plane[] planes = GeometryUtility.CalculateFrustumPlanes(GetComponent<Camera>());
+        Collider collider = target.GetComponent<Collider>();
+
+        if (GeometryUtility.TestPlanesAABB(planes, collider.bounds))
+        {
+            if (Vector3.Angle(target.transform.forward, target.transform.position - this.transform.position) <= target.GetFieldOfView() / 2)
+            {
+                // Monkey hit is successful
+                // target.TakeDamage(monkeyDamage);
+            }
         }
     }
 }

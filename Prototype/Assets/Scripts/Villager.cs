@@ -37,6 +37,11 @@ public class Villager : MonoBehaviour {
         randomDirection += transform.position;
         NavMeshHit hit;
         NavMesh.SamplePosition(randomDirection, out hit, VILLAGER_WANDER_RADIUS, 1);
-       // _agent.SetDestination(hit.position);
+        _agent.SetDestination(hit.position);
+    }
+
+    private void Die()
+    {
+        GameObject.Find("GameManager").GetComponent<GameManager>().SomebodyDied();
     }
 }
