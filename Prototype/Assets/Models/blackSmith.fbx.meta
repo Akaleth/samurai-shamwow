@@ -90,6 +90,44 @@ ModelImporter:
     100164: tavern:tavern:tavern:transform7
     100166: tavern:tavern:tavern:transform8
     100168: tavern:tavern:tavern:transform9
+    100170: pCube16
+    100172: pCube17
+    100174: pCube18
+    100176: pCube19
+    100178: pCube20
+    100180: pCube3
+    100182: pCube4
+    100184: polySurface1
+    100186: polySurface1 1
+    100188: polySurface2
+    100190: tavern:tavern:tavern:tavern:pCube9
+    100192: tavern:tavern:tavern:tavern:tavern:pCube16
+    100194: tavern:tavern:tavern:tavern:tavern:place3dTexture1
+    100196: tavern:tavern:tavern:tavern:tavern:place3dTexture2
+    100198: tavern:tavern:tavern:tavern:tavern:tavern:tavern:polySurface2
+    100200: tavern:tavern:tavern:tavern:tavern:tavern:tavern:tavern:tavern:tavern:pCube16
+    100202: tavern:tavern:tavern:tavern:tavern:tavern:tavern:tavern:tavern:tavern:tavern:tavern:polySurface2
+    100204: tavern:tavern:tavern:tavern:tavern:tavern:tavern:tavern:tavern:tavern:tavern:tavern:transform1
+    100206: tavern:tavern:tavern:tavern:tavern:tavern:tavern:tavern:tavern:tavern:tavern:tavern:transform2
+    100208: tavern:tavern:tavern:tavern:tavern:tavern:tavern:tavern:tavern:tavern:transform1
+    100210: tavern:tavern:tavern:tavern:tavern:tavern:tavern:tavern:tavern:tavern:transform2
+    100212: tavern:tavern:tavern:tavern:tavern:tavern:tavern:transform1
+    100214: tavern:tavern:tavern:tavern:tavern:tavern:tavern:transform2
+    100216: tavern:tavern:tavern:tavern:tavern:transform1
+    100218: tavern:tavern:tavern:tavern:tavern:transform2
+    100220: tavern:tavern:tavern:tavern:tavern:transform3
+    100222: tavern:tavern:tavern:tavern:tavern:transform4
+    100224: tavern:tavern:tavern:tavern:transform4
+    100226: tavern:tavern:tavern:tavern:transform5
+    100228: transform1
+    100230: transform2
+    100232: transform3
+    100234: transform4
+    100236: transform5
+    100238: transform6
+    100240: transform7
+    100242: transform8
+    100244: transform9
     400000: //RootNode
     400002: pCube2
     400004: tavern:back
@@ -175,6 +213,44 @@ ModelImporter:
     400164: tavern:tavern:tavern:transform7
     400166: tavern:tavern:tavern:transform8
     400168: tavern:tavern:tavern:transform9
+    400170: pCube16
+    400172: pCube17
+    400174: pCube18
+    400176: pCube19
+    400178: pCube20
+    400180: pCube3
+    400182: pCube4
+    400184: polySurface1
+    400186: polySurface1 1
+    400188: polySurface2
+    400190: tavern:tavern:tavern:tavern:pCube9
+    400192: tavern:tavern:tavern:tavern:tavern:pCube16
+    400194: tavern:tavern:tavern:tavern:tavern:place3dTexture1
+    400196: tavern:tavern:tavern:tavern:tavern:place3dTexture2
+    400198: tavern:tavern:tavern:tavern:tavern:tavern:tavern:polySurface2
+    400200: tavern:tavern:tavern:tavern:tavern:tavern:tavern:tavern:tavern:tavern:pCube16
+    400202: tavern:tavern:tavern:tavern:tavern:tavern:tavern:tavern:tavern:tavern:tavern:tavern:polySurface2
+    400204: tavern:tavern:tavern:tavern:tavern:tavern:tavern:tavern:tavern:tavern:tavern:tavern:transform1
+    400206: tavern:tavern:tavern:tavern:tavern:tavern:tavern:tavern:tavern:tavern:tavern:tavern:transform2
+    400208: tavern:tavern:tavern:tavern:tavern:tavern:tavern:tavern:tavern:tavern:transform1
+    400210: tavern:tavern:tavern:tavern:tavern:tavern:tavern:tavern:tavern:tavern:transform2
+    400212: tavern:tavern:tavern:tavern:tavern:tavern:tavern:transform1
+    400214: tavern:tavern:tavern:tavern:tavern:tavern:tavern:transform2
+    400216: tavern:tavern:tavern:tavern:tavern:transform1
+    400218: tavern:tavern:tavern:tavern:tavern:transform2
+    400220: tavern:tavern:tavern:tavern:tavern:transform3
+    400222: tavern:tavern:tavern:tavern:tavern:transform4
+    400224: tavern:tavern:tavern:tavern:transform4
+    400226: tavern:tavern:tavern:tavern:transform5
+    400228: transform1
+    400230: transform2
+    400232: transform3
+    400234: transform4
+    400236: transform5
+    400238: transform6
+    400240: transform7
+    400242: transform8
+    400244: transform9
     2300000: pCube2
     2300002: tavern:pCube12
     2300004: tavern:pCube13
@@ -190,6 +266,7 @@ ModelImporter:
     2300024: tavern:tavern:pCube9
     2300026: tavern:tavern:polySurface2
     2300028: tavern:tavern:tavern:pCube7
+    2300030: tavern:tavern:tavern:tavern:tavern:tavern:tavern:tavern:tavern:tavern:tavern:tavern:polySurface2
     3300000: pCube2
     3300002: tavern:pCube12
     3300004: tavern:pCube13
@@ -205,6 +282,7 @@ ModelImporter:
     3300024: tavern:tavern:pCube9
     3300026: tavern:tavern:polySurface2
     3300028: tavern:tavern:tavern:pCube7
+    3300030: tavern:tavern:tavern:tavern:tavern:tavern:tavern:tavern:tavern:tavern:tavern:tavern:polySurface2
     4300000: pCube2
     4300002: tavern:pCube7
     4300004: tavern:pCube12
@@ -220,6 +298,7 @@ ModelImporter:
     4300024: tavern:tavern:polySurface2
     4300026: tavern:tavern:pCube9
     4300028: tavern:tavern:tavern:pCube7
+    4300030: tavern:tavern:tavern:tavern:tavern:tavern:tavern:tavern:tavern:tavern:tavern:tavern:polySurface2
     9500000: //RootNode
   materials:
     importMaterials: 1
